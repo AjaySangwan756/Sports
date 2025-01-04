@@ -1,0 +1,9 @@
+<h1>Add New Player</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Player Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="number" name="age" placeholder="Age" required>
+    <button type="submit">Add Player</button>
+</form>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>

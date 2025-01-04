@@ -1,0 +1,16 @@
+<h1>Sports Dashboard</h1>
+<h2>Players</h2>
+<ul>
+    {% for player in players %}
+    <li>{{ player.name }} - {{ player.email }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_player' %}">Add Player</a>
+
+<h2>Events</h2>
+<ul>
+    {% for event in events %}
+    <li>{{ event.title }} on {{ event.date }} at {{ event.location }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_event' %}">Add Event</a>

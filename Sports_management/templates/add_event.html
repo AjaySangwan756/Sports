@@ -1,0 +1,9 @@
+<h1>Add New Event</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Event Title" required>
+    <input type="date" name="date" required>
+    <input type="text" name="location" placeholder="Location" required>
+    <button type="submit">Add Event</button>
+</form>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
