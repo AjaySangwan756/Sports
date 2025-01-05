@@ -1,9 +1,108 @@
-<h1>Add New Event</h1>
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="title" placeholder="Event Title" required>
-    <input type="date" name="date" required>
-    <input type="text" name="location" placeholder="Location" required>
-    <button type="submit">Add Event</button>
-</form>
-<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Event - Army Sports Management System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #154360;
+            margin-top: 40px;
+        }
+
+        .event-form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #E2C799;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #C08261;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus {
+            border-color: #154360;
+            box-shadow: 0 0 8px rgba(21, 67, 96, 0.3);
+            outline: none;
+        }
+
+        .submit-btn {
+            background-color: #154360;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1A5276;
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Event</h1>
+    <form method="POST" class="event-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="title" placeholder="Event Title" required>
+        </div>
+        <div class="form-group">
+            <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="location" placeholder="Location" required>
+        </div>
+        <button type="submit" class="submit-btn">Add Event</button>
+    </form>
+
+    <a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
+
+</body>
+</html>

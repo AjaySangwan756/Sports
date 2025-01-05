@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Dashboard</title>
+    <title>Army Sports Management System</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -17,41 +17,89 @@
         }
 
         header {
-            background: linear-gradient(45deg, #1e90ff, #00bcd4);
-            color: #fff;
+            background: linear-gradient(45deg, rgb(154, 63, 32), rgb(216, 159, 111));
+            color: #fff; /* Light text color for header */
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease-in-out;
+        }
+
+        header:hover {
+            background: linear-gradient(45deg, rgb(216, 159, 111), rgb(154, 63, 32));
         }
 
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            color: #fff; /* Ensuring header text stands out */
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .side-nav {
+            width: 250px;
+            background-color: #C08261;
+            color: #fff; /* White text color for better contrast */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-nav h2 {
+            margin: 0 0 20px;
+            font-size: 1.8rem;
+            color: #fff; /* White color for headings */
+        }
+
+        .side-nav a {
+            color: #fff; /* White text color for links */
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.2s, color 0.3s;
+        }
+
+        .side-nav a:hover {
+            background-color: rgb(200, 172, 116);
+            color: #000; /* Dark text on hover for better visibility */
+            transform: translateX(10px);
         }
 
         .dashboard-container {
+            flex: 1;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             gap: 20px;
             max-width: 1200px;
             margin: 30px auto;
             padding: 20px;
-            flex-grow: 1;
         }
 
         .section-container {
             flex: 1;
             padding: 20px;
             border-radius: 12px;
-            color: #fff;
+            color: #333; /* Dark text color for better readability */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            background: #1e90ff; /* Default color */
+            background: #E2C799;
+            min-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .section-events {
-            background: #ff6f61;
+        .section-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         h2 {
@@ -59,6 +107,7 @@
             margin-bottom: 15px;
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+            color: #333; /* Dark text for headings */
         }
 
         table {
@@ -71,11 +120,17 @@
             text-align: left;
             padding: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            color: #fff;
+            color: #333; /* Dark text for table cells */
+            transition: background 0.3s, color 0.3s;
+        }
+
+        table tr:hover td {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000; /* Dark text color on hover for better visibility */
         }
 
         .scrollable {
-            max-height: 200px; /* Limit table height */
+            max-height: 200px;
             overflow-y: auto;
         }
 
@@ -83,6 +138,7 @@
             position: sticky;
             top: 0;
             background: rgba(0, 0, 0, 0.5);
+            color: #fff; /* White color for table headers */
         }
 
         .add-btn {
@@ -90,24 +146,25 @@
             margin-top: auto;
             padding: 10px 15px;
             background: rgba(255, 255, 255, 0.8);
-            color: #333;
+            color: #333; /* Dark text for button */
             text-decoration: none;
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s;
         }
 
         .add-btn:hover {
             background: #fff;
-            color: #000;
+            color: #000; /* Dark text on hover for the button */
+            transform: scale(1.05);
         }
 
         footer {
             text-align: center;
             padding: 15px 0;
-            background: #333;
-            color: #fff;
+            background: #F2ECBE;
+            color: #000; /* Dark footer text */
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -118,66 +175,114 @@
             .dashboard-container {
                 flex-direction: column;
             }
+
+            .side-nav {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Sports Dashboard</h1>
+        <h1>Army Sports Management System</h1>
     </header>
-    <div class="dashboard-container">
-        <!-- Players Section -->
-        <div class="section-container section-players">
-            <h2>Players</h2>
-            <div class="scrollable">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for player in players %}
-                        <tr>
-                            <td>{{ player.name }}</td>
-                            <td>{{ player.email }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <a href="{% url 'add_player' %}" class="add-btn">Add Player</a>
+    
+    <div class="main-content">
+        <div class="side-nav">
+            <h2>Dashboard</h2>
+            <a href="#players">Players</a>
+            <a href="#events">Events</a>
+            <a href="#schedule">Schedule</a>
         </div>
 
-        <!-- Events Section -->
-        <div class="section-container section-events">
-            <h2>Events</h2>
-            <div class="scrollable">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Date</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for event in events %}
-                        <tr>
-                            <td>{{ event.title }}</td>
-                            <td>{{ event.date }}</td>
-                            <td>{{ event.location }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        <div class="content">
+            <div class="dashboard-container">
+                <!-- Players Section -->
+                <div class="section-container section-players" id="players">
+                    <h2>Players</h2>
+                    <div class="scrollable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in players %}
+                                <tr>
+                                    <td>{{ player.name }}</td>
+                                    <td>{{ player.email }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_player' %}" class="add-btn">Add Player</a>
+                </div>
+
+                <!-- Events Section -->
+                <div class="section-container section-events" id="events">
+                    <h2>Events</h2>
+                    <div class="scrollable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                <tr>
+                                    <td>{{ event.title }}</td>
+                                    <td>{{ event.date }}</td>
+                                    <td>{{ event.location }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_event' %}" class="add-btn">Add Event</a>
+                </div>
+
+                <!-- Schedule Section -->
+                <div class="section-container section-schedule" id="schedule">
+                    <h2>Schedule</h2>
+                    <div class="scrollable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Time</th>
+                                    <th>Assigned To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% comment %} {% for schedule in schedules %}
+                                <tr>
+                                    <td>{{ schedule.task }}</td>
+                                    <td>{{ schedule.time }}</td>
+                                    <td>{{ schedule.assigned_to }}</td>
+                                </tr>
+                                {% endfor %} {% endcomment %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% comment %} <a href="{% url 'add_schedule' %}" class="add-btn">Add Schedule</a> {% endcomment %}
+                </div>
             </div>
-            <a href="{% url 'add_event' %}" class="add-btn">Add Event</a>
         </div>
     </div>
+
     <footer>
-        <p>&copy; 2025 Sports Dashboard. All rights reserved.</p>
+        <p>&copy; Sports in my vain</p>
     </footer>
 </body>
 </html>
