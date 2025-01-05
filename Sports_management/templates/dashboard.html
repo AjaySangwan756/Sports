@@ -1,16 +1,183 @@
-<h1>Sports Dashboard</h1>
-<h2>Players</h2>
-<ul>
-    {% for player in players %}
-    <li>{{ player.name }} - {{ player.email }}</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'add_player' %}">Add Player</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-<h2>Events</h2>
-<ul>
-    {% for event in events %}
-    <li>{{ event.title }} on {{ event.date }} at {{ event.location }}</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'add_event' %}">Add Event</a>
+        header {
+            background: linear-gradient(45deg, #1e90ff, #00bcd4);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .section-container {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            background: #1e90ff; /* Default color */
+        }
+
+        .section-events {
+            background: #ff6f61;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+        }
+
+        .scrollable {
+            max-height: 200px; /* Limit table height */
+            overflow-y: auto;
+        }
+
+        table th {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .add-btn {
+            display: inline-block;
+            margin-top: auto;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #333;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sports Dashboard</h1>
+    </header>
+    <div class="dashboard-container">
+        <!-- Players Section -->
+        <div class="section-container section-players">
+            <h2>Players</h2>
+            <div class="scrollable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in players %}
+                        <tr>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'add_player' %}" class="add-btn">Add Player</a>
+        </div>
+
+        <!-- Events Section -->
+        <div class="section-container section-events">
+            <h2>Events</h2>
+            <div class="scrollable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                        <tr>
+                            <td>{{ event.title }}</td>
+                            <td>{{ event.date }}</td>
+                            <td>{{ event.location }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'add_event' %}" class="add-btn">Add Event</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Sports Dashboard. All rights reserved.</p>
+    </footer>
+</body>
+</html>
