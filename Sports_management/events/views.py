@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Player, Event, Plan
+from .models import Player, Event, Plan, SportsSchedule
 
 def dashboard(request):
     players = Player.objects.all()
@@ -28,6 +28,16 @@ def schedule(request):
     if request.method == 'POST':
         command = request.POST['command']
         type = request.POST['type']
-        plan = Plan.objects.create(command=command, type=type)
-        return redirect('dashboard')
+        Plan.objects.create(command=command, type=type)
+        return redirect('plan')
     return render(request, 'schedule.html')
+
+def plan(request):
+    if request.method == 'POST':
+        sports = request.POST['sports']
+        year = request.POST['year']
+        period_from = request.POST['period_from']
+        period_to = request.POST['period_to']
+        SportsSchedule.objects.create(sports=sports, year=year, period_from=period_from, period_to=period_to)
+        return redirect('dashboard')
+    return render(request, 'plan.html')

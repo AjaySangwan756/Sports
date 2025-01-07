@@ -25,3 +25,19 @@ class Plan(models.Model):
  
     def __str__(self):
         return self.command
+    
+class SportsSchedule(models.Model):
+    SPORTS_CHOICES = [
+        ('Football', 'Football'),
+        ('Basketball', 'Basketball'),
+        ('Tennis', 'Tennis'),
+        ('Cricket', 'Cricket'),
+    ]
+    
+    sports = models.CharField(max_length=50, choices=SPORTS_CHOICES)
+    year = models.PositiveIntegerField()
+    period_from = models.DateField()
+    period_to = models.DateField()
+
+    def __str__(self):
+        return f"{self.sports} - {self.year}"

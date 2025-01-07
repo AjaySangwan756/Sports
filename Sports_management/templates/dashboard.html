@@ -1,110 +1,120 @@
-{% extends "base.html" %}
-{% comment %} <!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Army Sports Management System</title>
-    
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
-<body> {% endcomment %}
-    {% comment %} <header>
+<body>
+    <header>
         <h1>Army Sports Management System</h1>
-    </header> {% endcomment %}
+    </header>
 
-    {% block content %}
-    {% comment %} <div class="main-content"> {% endcomment %}
-        {% comment %} <div class="side-nav">
-            <h2>Dashboard</h2>
-            <a href="#players">Players</a>
-            <a href="#events">Events</a>
-            <a href="{% url 'schedule' %}">Schedule</a>
-        </div> {% endcomment %}
+    <!-- Sidebar -->
+    <div class="side-nav">
+        <h2>Dashboard</h2>
+        <a href="#players">Players</a>
+        <a href="#events">Events</a>
+        <a href="#schedule">Schedule</a>
+    </div>
 
-        <div class="content">
-            <div class="dashboard-container">
-                <!-- Players Section -->
-                <div class="section-container section-players" id="players">
-                    <h2>Players</h2>
-                    <div class="scrollable">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for player in players %}
-                                <tr>
-                                    <td>{{ player.name }}</td>
-                                    <td>{{ player.email }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <a href="{% url 'add_player' %}" class="add-btn">Add Player</a>
-                </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Players Section -->
+        <div class="section-container" id="players">
+            <h2>Players</h2>
+            <div class="scrollable">
+                <!-- Table for Players -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>john@example.com</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-                <!-- Events Section -->
-                <div class="section-container section-events" id="events">
-                    <h2>Events</h2>
-                    <div class="scrollable">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for event in events %}
-                                <tr>
-                                    <td>{{ event.title }}</td>
-                                    <td>{{ event.date }}</td>
-                                    <td>{{ event.location }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <a href="{% url 'add_event' %}" class="add-btn">Add Event</a>
-                </div>
+        <!-- Events Section -->
+        <div class="section-container" id="events">
+            <h2>Events</h2>
+            <div class="scrollable">
+                <!-- Table for Events -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Annual Meet</td>
+                            <td>2023-10-10</td>
+                            <td>City Hall</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-                <!-- Schedule Section -->
-                <div class="section-container section-schedule" id="schedule">
-                    <h2>Schedule</h2>
-                    <div class="scrollable">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Task</th>
-                                    <th>Time</th>
-                                    <th>Assigned To</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% comment %} {% for schedule in schedules %}
-                                <tr>
-                                    <td>{{ schedule.task }}</td>
-                                    <td>{{ schedule.time }}</td>
-                                    <td>{{ schedule.assigned_to }}</td>
-                                </tr>
-                                {% endfor %} {% endcomment %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {% comment %} <a href="{% url 'add_schedule' %}" class="add-btn">Add Schedule</a> {% endcomment %}
-                </div>
+        <!-- Schedule Section -->
+        <div class="section-container" id="schedule">
+            <h2>Schedule</h2>
+            <div class="scrollable">
+                <!-- Table for Schedule -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Sports</th>
+                            <th>Year</th>
+                            <th>Period From</th>
+                            <th>Period To</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Soccer</td>
+                            <td>2023</td>
+                            <td>2023-09-01</td>
+                            <td>2023-09-30</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-{% endblock %}
-    {% comment %} <footer>
+
+    <footer>
         <p>&copy; Sports in my vain</p>
-    </footer> {% endcomment %}
-{% comment %} </body>
-</html> {% endcomment %}
+    </footer>
+</body>
+</html>
