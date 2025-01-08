@@ -5,28 +5,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Army Sports Management System</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/main.css' %}"> {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
+<style>
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(45deg,rgb(198, 59, 100),rgb(246, 8, 56));
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 3rem;
+    font-weight: bold;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    height:70px;
+}
+.side-nav hr {
+    border: none;
+    border-top: 5px solid #ecf0f1; /* Light gray line */
+    margin: 8px 0; /* Add some spacing above and below */
+    opacity: 0.3; /* Slightly transparent */
+}
+
+
+/* Sidebar Styles */
+.side-nav {
+    width: 250px;
+    background-color: #A0153E;
+    color: white;
+    position: fixed;
+    top: 75px; /* Below header */
+    bottom: 40px; /* Above footer */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 10;
+    transition: transform 0.3s;
+}
+
+.side-nav h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ecf0f1;
+}
+
+.side-nav a {
+    text-decoration: none;
+    color: #ecf0f1;
+    padding: 12px 15px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-size: 1.5rem;
+}
+
+.side-nav a:hover {
+    background-color: #34495e;
+    transform: scale(1.05);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 290px; /* Space for sidebar */
+    margin-top: 80px; /* Space for header */
+    margin-bottom: 40px; /* Space for footer */
+    padding: 20px;
+    overflow-y: auto;
+    background-color:#95206e;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - 120px); /* Adjust height dynamically */
+    box-sizing: border-box;
+}
+
+/* Section Container */
+.section-container {
+    background:rgb(201, 196, 199);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.section-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-container h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 15px;
+    color:rgb(3, 3, 3);
+}
+
+/* Scrollable Table */
+.scrollable {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background-color:rgb(174, 48, 113);
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+table a:hover {
+    color: #0056b3;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #00224D;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    z-index: 1000;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .side-nav {
+        transform: translateX(-260px); /* Hide sidebar */
+    }
+
+    .side-nav.active {
+        transform: translateX(0); /* Show sidebar on toggle */
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    .menu-toggle {
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+</style>
 <body>
     <header>
-        <h1>Army Sports Management System</h1>
+        {% comment %} <div class="menu-toggle" onclick="toggleSidebar()">&#9776;</div> {% endcomment %}
+        Army Sports Management System
     </header>
 
-    <!-- Sidebar -->
     <div class="side-nav">
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
+        <hr>
         <a href="#players">Players</a>
         <a href="#events">Events</a>
         <a href="#schedule">Schedule</a>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Players Section -->
         <div class="section-container" id="players">
             <h2>Players</h2>
             <div class="scrollable">
-                <!-- Table for Players -->
                 <table>
                     <thead>
                         <tr>
@@ -49,12 +241,9 @@
                 </table>
             </div>
         </div>
-
-        <!-- Events Section -->
         <div class="section-container" id="events">
             <h2>Events</h2>
             <div class="scrollable">
-                <!-- Table for Events -->
                 <table>
                     <thead>
                         <tr>
@@ -79,20 +268,16 @@
                 </table>
             </div>
         </div>
-
-        <!-- Schedule Section -->
-        <div class="section-container" id="schedule">
-            <h2>Schedule</h2>
+        <div class="section-container" id="events">
+            <h2>Events</h2>
             <div class="scrollable">
-                <!-- Table for Schedule -->
                 <table>
                     <thead>
                         <tr>
                             <th>Ser No</th>
-                            <th>Sports</th>
-                            <th>Year</th>
-                            <th>Period From</th>
-                            <th>Period To</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Location</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -100,10 +285,36 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Soccer</td>
-                            <td>2023</td>
-                            <td>2023-09-01</td>
-                            <td>2023-09-30</td>
+                            <td>Annual Meet</td>
+                            <td>2023-10-10</td>
+                            <td>City Hall</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="section-container" id="events">
+            <h2>Events</h2>
+            <div class="scrollable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Annual Meet</td>
+                            <td>2023-10-10</td>
+                            <td>City Hall</td>
                             <td><a href="#">Edit</a></td>
                             <td><a href="#">Delete</a></td>
                         </tr>
@@ -114,7 +325,14 @@
     </div>
 
     <footer>
-        <p>&copy; Sports in my vain</p>
+        &copy; 2025 Sports in My Veins
     </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.side-nav');
+            sidebar.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
