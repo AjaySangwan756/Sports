@@ -20,6 +20,7 @@ class Event(models.Model):
         return self.title
 
 class Plan(models.Model):
+   
     command = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
  

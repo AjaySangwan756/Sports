@@ -28,6 +28,7 @@ def schedule(request):
     if request.method == 'POST':
         command = request.POST['command']
         type = request.POST['type']
+        print(command)
         Plan.objects.create(command=command, type=type)
         return redirect('plan')
     return render(request, 'schedule.html')
@@ -41,3 +42,11 @@ def plan(request):
         SportsSchedule.objects.create(sports=sports, year=year, period_from=period_from, period_to=period_to)
         return redirect('dashboard')
     return render(request, 'plan.html')
+
+def dashboard(request):
+    plan=Plan.objects.all()
+    print(plan)
+    schedule=SportsSchedule.objects.all()
+    print(schedule)
+
+    return render(request, 'dashboard.html', {'plan':plan})
