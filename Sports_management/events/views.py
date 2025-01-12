@@ -45,8 +45,15 @@ def plan(request):
 
 def dashboard(request):
     plan=Plan.objects.all()
+    for n in plan:
+        print(n.command)
+        print(n.type)
+        if n.command=='Central_Command':
+            if n.type=='Inter_Battallion':
+                print('Yes')
+        else:
+            print('No')
     print(plan)
     schedule=SportsSchedule.objects.all()
     print(schedule)
-
     return render(request, 'dashboard.html', {'plan':plan})
